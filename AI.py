@@ -111,10 +111,11 @@ class SimpleAI:
             elif self.question[0] in actions_plus:
                 if len(get_close_matches(word, fruits)) > 0:
                     final = 'Хлопчик {} {} {}.'.format(self.question[0],
-                                                       self.start_state[get_close_matches(word, fruits)[0]]
-                                                       + self.conditions[get_close_matches(word, fruits)[0]], word)
+                                                       self.conditions[get_close_matches(word, fruits)[0]
+                                                       - self.start_state[get_close_matches(word, fruits)[0]]], word)
                 elif word == 'фруктів':
-                    final = 'Хлопчик {} {} {}.'.format(self.question[0], self.num_of_fruits_start + self.num_of_fruits,
+                    final = 'Хлопчик {} {} {}.'.format(self.question[0],
+                                                       sum(self.conditions.values()) - sum(self.start_state.values()),
                                                        word)
 
         self.response = final
